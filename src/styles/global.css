@@ -1,0 +1,52 @@
+/* limpa css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap');
+
+/* @font-face {
+  font-family: 'Nunito';
+  src: url('../assets/fonts/Nunito/Nunito-Regular.ttf');
+  src: local('Nunito'), local('Nunito'), 
+  url('../assets/fonts/Nunito/Nunito-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Nunito-SemiBold';
+  src: url('../assets/fonts/Nunito/Nunito-SemiBold.ttf');
+  src: local('Nunito-SemiBold'), local('Nunito-SemiBold'), 
+  url('../assets/fonts/Nunito/Nunito-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Nunito-Bold';
+  src: url('../assets/fonts/Nunito/Nunito-Bold.ttf');
+  src: local('Nunito-Bold'), local('Nunito-Bold'), 
+  url('../assets/fonts/Nunito/Nunito-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Nunito-ExtraBold';
+  src: url('../assets/fonts/Nunito/Nunito-ExtraBold.ttf');
+  src: local('Nunito-ExtraBold'), local('Nunito-ExtraBold'), 
+  url('../assets/fonts/Nunito/Nunito-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+} */
+
+/* define base css */
+body {
+  color: #fff;
+  background-color: #ebf2f5;
+}
+
+body, input, button, textarea {
+  font: 600 18px Nunito, sans-serif;
+}
