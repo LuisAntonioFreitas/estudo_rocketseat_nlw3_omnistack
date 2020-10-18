@@ -6,6 +6,19 @@ import '../styles/pages/landing.css'
 
 import logoImg from '../images/logo.svg';
 
+// Variáveis de Sessão
+sessionStorage.setItem('@map/latitude/inicial', '-22.9752102');
+sessionStorage.setItem('@map/longitude/inicial', '-43.3746088');
+sessionStorage.setItem('@map/zoom/inicial', '14');
+sessionStorage.setItem('@map/stylePrimary', 'outdoors-v11');
+sessionStorage.setItem('@map/styleSecundary', 'satellite-streets-v11');
+sessionStorage.setItem('@map/style/inicial', String(sessionStorage.getItem('@map/stylePrimary')));
+
+sessionStorage.setItem('@map/latitude/atual', String(sessionStorage.getItem('@map/latitude/inicial')));
+sessionStorage.setItem('@map/longitude/atual', String(sessionStorage.getItem('@map/longitude/inicial')));
+sessionStorage.setItem('@map/zoom/atual', String(sessionStorage.getItem('@map/zoom/inicial')));
+sessionStorage.setItem('@map/style/atual', String(sessionStorage.getItem('@map/style/inicial')));
+
 function Landing() {
   return (
     <div id="page-landing">
