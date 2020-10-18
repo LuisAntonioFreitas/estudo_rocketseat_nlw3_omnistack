@@ -157,15 +157,6 @@ function OrphanagesMap() {
             </Marker>
           )
         })}
-
-        <button
-          type="button"
-          className="link tipo-mapa"
-          onClick={handleMapStyle}
-          >
-          <FiRefreshCw size={32} color="#fff"></FiRefreshCw>
-        </button>
-
       </Map>
 
       <button
@@ -174,6 +165,14 @@ function OrphanagesMap() {
         onClick={handleMapPontoInicial}
         >
         <BiTargetLock size={32} color="#fff"></BiTargetLock>
+      </button>
+
+      <button
+        type="button"
+        className="link tipo-mapa"
+        onClick={handleMapStyle}
+        >
+        <FiRefreshCw size={32} color="#fff"></FiRefreshCw>
       </button>
 
       <Link to="/orphanages/create" className="link create-orphanage">

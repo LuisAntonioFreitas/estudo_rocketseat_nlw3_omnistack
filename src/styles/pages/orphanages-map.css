@@ -63,7 +63,7 @@
 
 #page-map .ponto-inicial-mapa {
   right: 40px;
-  top: 40px;
+  top: 120px;
 
   z-index: 10;
 
@@ -81,13 +81,14 @@
   transform: rotate(90deg);
 }
 
-#page-map .leaflet-container .tipo-mapa {
-  left: 40px;
-  bottom: 40px;
+#page-map .tipo-mapa {
+  right: 40px;
+  top: 40px;
 
-  z-index: 1000;
+  z-index: 10;
 
   border: none;
+  outline: none;
 
   cursor: pointer;
 
