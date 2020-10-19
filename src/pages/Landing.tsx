@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowRight } from 'react-icons/fi';
 
@@ -6,7 +6,10 @@ import '../styles/pages/landing.css'
 
 import logoImg from '../images/logo.svg';
 
+import localUsuario from "../utils/geolocation";
+
 // Variáveis de Sessão
+sessionStorage.setItem('@map/acesso/inicial', '1');
 sessionStorage.setItem('@map/latitude/inicial', '-22.9752102');
 sessionStorage.setItem('@map/longitude/inicial', '-43.3746088');
 sessionStorage.setItem('@map/zoom/inicial', '14');
@@ -18,6 +21,9 @@ sessionStorage.setItem('@map/latitude/atual', String(sessionStorage.getItem('@ma
 sessionStorage.setItem('@map/longitude/atual', String(sessionStorage.getItem('@map/longitude/inicial')));
 sessionStorage.setItem('@map/zoom/atual', String(sessionStorage.getItem('@map/zoom/inicial')));
 sessionStorage.setItem('@map/style/atual', String(sessionStorage.getItem('@map/style/inicial')));
+
+// Pega localização do usuário
+localUsuario();
 
 function Landing() {
   return (

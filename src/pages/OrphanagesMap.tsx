@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
-import { FiPlus, FiRefreshCw, FiArrowRight } from 'react-icons/fi';
+import { FiPlus, FiArrowRight } from 'react-icons/fi';
 import { BiTargetLock } from 'react-icons/bi';
+import { BsCircleHalf } from 'react-icons/bs';
 
 import api from '../services/api';
 
@@ -13,6 +14,7 @@ import '../styles/pages/orphanages-map.css'
 
 import mapMarkerImg from '../images/map-marker.svg';
 
+import localUsuario from "../utils/geolocation";
 import mapIcon from "../utils/mapIcon";
 const mapToken = process.env.REACT_APP_MAPBOX_TOKEN;
 //const mapStyle = 'light-v10';
@@ -38,15 +40,19 @@ function OrphanagesMap() {
   const [mapZoom, setMapZoom] = useState(Number(sessionStorage.getItem('@map/zoom/atual')));
   const [mapStyle, setMapStyle] = useState(sessionStorage.getItem('@map/style/atual'));
 
-  const [origem, setOrigem] = useState({ latitude: Number(sessionStorage.getItem('@map/latitude/atual')), 
-                                         longitude: Number(sessionStorage.getItem('@map/longitude/atual')), 
-                                         zoom: Number(sessionStorage.getItem('@map/zoom/atual')) 
-                                      })
+  const [mapPosicao, setMapPosicao] = useState({ latitude: Number(sessionStorage.getItem('@map/latitude/atual')), 
+                                                 longitude: Number(sessionStorage.getItem('@map/longitude/atual')), 
+                                                 zoom: Number(sessionStorage.getItem('@map/zoom/atual')) 
+                                              })
 
   useEffect(() => {
-    setMapLatitude(Number(sessionStorage.getItem('@map/latitude/atual')));
-    setMapLongitude(Number(sessionStorage.getItem('@map/longitude/atual')));
-    setMapZoom(Number(sessionStorage.getItem('@map/zoom/atual')));
+    if (Number(sessionStorage.getItem('@map/acesso/inicial')) == 1) {
+        // Pega localização do usuário
+        localUsuario();
+        sessionStorage.setItem('@map/acesso/inicial', '0');
+    };
+
+    getMap();
 
     api.get('orphanages').then(response => {
       //console.log(response);
@@ -58,13 +64,16 @@ function OrphanagesMap() {
   }, []);
 
   function handleMapPontoInicial() {
-    sessionStorage.setItem('@map/latitude/atual', String(sessionStorage.getItem('@map/latitude/inicial')));
-    sessionStorage.setItem('@map/longitude/atual', String(sessionStorage.getItem('@map/longitude/inicial')));
-    sessionStorage.setItem('@map/zoom/atual', String(sessionStorage.getItem('@map/zoom/inicial')));
+    // Pega localização do usuário
+    localUsuario();
 
-    setMapLatitude(Number(sessionStorage.getItem('@map/latitude/inicial')));
-    setMapLongitude(Number(sessionStorage.getItem('@map/longitude/inicial')));
-    setMapZoom(Number(sessionStorage.getItem('@map/zoom/inicial')));
+    getMap();
+  }
+
+  function getMap() {
+    setMapLatitude(Number(sessionStorage.getItem('@map/latitude/atual') + String((1 + (Math.random() * (1000-1))).toFixed())));
+    setMapLongitude(Number(sessionStorage.getItem('@map/longitude/atual') + String((1 + (Math.random() * (1000-1))).toFixed())));
+    setMapZoom(Number(sessionStorage.getItem('@map/zoom/atual')));
   }
 
   function handleMapStyle() {
@@ -96,7 +105,7 @@ function OrphanagesMap() {
     sessionStorage.setItem('@map/longitude/atual', String(nLng))
     sessionStorage.setItem('@map/zoom/atual', String(nZoom))
 
-    setOrigem({
+    setMapPosicao({
       latitude: nLat,
       longitude: nLng,
       zoom: nZoom
@@ -172,7 +181,7 @@ function OrphanagesMap() {
         className="link tipo-mapa"
         onClick={handleMapStyle}
         >
-        <FiRefreshCw size={32} color="#fff"></FiRefreshCw>
+        <BsCircleHalf size={32} color="#fff"></BsCircleHalf>
       </button>
 
       <Link to="/orphanages/create" className="link create-orphanage">
