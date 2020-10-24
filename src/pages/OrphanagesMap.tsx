@@ -16,6 +16,7 @@ import mapMarkerImg from '../images/map-marker.svg';
 
 import localUsuario from "../utils/geolocation";
 import mapIcon from "../utils/mapIcon";
+import { createArrayTypeNode } from 'typescript';
 const mapToken = process.env.REACT_APP_MAPBOX_TOKEN;
 //const mapStyle = 'light-v10';
 const mapStylePrimary = sessionStorage.getItem('@map/stylePrimary'); //'outdoors-v11';
@@ -55,8 +56,15 @@ function OrphanagesMap() {
     getMap();
 
     api.get('orphanages').then(response => {
-      //console.log(response);
-      setOrphanages(response.data);
+      console.log(response); console.log(response.data);
+
+      var data = [];
+      if (!response.data.length) {
+        data.push(response.data);
+      } else {
+        data = response.data;
+      }
+      setOrphanages(Array.from(data));
     })
     .catch(function (error) {
       console.log(error.response);
